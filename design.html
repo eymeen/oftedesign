@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>محرك شجرة العائلة العضوية</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: #fff;
+  color: #111;
+  font-family: 'Tajawal', sans-serif;
+  font-weight: 400;
+  direction: rtl;
+  font-size: 17px;
+  line-height: 1.8;
+}
+.amiri { font-family: 'Amiri', serif; }
+h1 { font-family: 'Amiri', serif; font-size: clamp(3rem, 9vw, 7rem); font-weight: 700; line-height: 1.05; }
+h2 { font-family: 'Amiri', serif; font-size: clamp(1.8rem, 4vw, 3rem); font-weight: 700; line-height: 1.15; }
+h3 { font-family: 'Amiri', serif; font-size: 1.35rem; font-weight: 700; margin-bottom: 0.5rem; }
+p { color: #333; line-height: 1.85; }
+nav {
+  border-bottom: 1px solid #e8e8e8;
+  padding: 1.4rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  background: #fff;
+  z-index: 100;
+}
+.nav-logo { font-family: 'Amiri', serif; font-size: 1rem; font-weight: 700; color: #111; }
+.nav-links { display: flex; gap: 2rem; list-style: none; }
+.nav-links a { color: #777; text-decoration: none; font-size: 0.85rem; transition: color 0.2s; }
+.nav-links a:hover { color: #111; }
+.hero {
+  padding: 8rem 2rem 5rem;
+  max-width: 860px;
+  margin: 0 auto;
+  border-bottom: 1px solid #e8e8e8;
+}
+.hero-label { font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: #aaa; margin-bottom: 2rem; display: block; }
+.hero h1 { margin-bottom: 2.5rem; }
+.hero-sub { font-size: 1.1rem; color: #555; max-width: 520px; line-height: 1.9; border-right: 2px solid #111; padding-right: 1.2rem; }
+section { padding: 5.5rem 2rem; max-width: 860px; margin: 0 auto; border-bottom: 1px solid #e8e8e8; }
+.step-label { font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: #bbb; margin-bottom: 0.3rem; display: block; }
+.step-num { font-family: 'Amiri', serif; font-size: 0.95rem; color: #aaa; margin-bottom: 1.5rem; display: block; }
+section h2 { margin-bottom: 1.2rem; }
+section > p { max-width: 580px; }
+.img-block { margin: 3rem 0; }
+.img-block img { width: 100%; display: block; border: 1px solid #e8e8e8; }
+.img-row { display: grid; gap: 1px; background: #e8e8e8; border: 1px solid #e8e8e8; margin: 3rem 0; }
+.img-row.cols-2 { grid-template-columns: 1fr 1fr; }
+.img-row.cols-3 { grid-template-columns: 1fr 1fr 1fr; }
+.img-row.cols-4 { grid-template-columns: 1fr 1fr 1fr 1fr; }
+.img-row img { width: 100%; display: block; background: #fff; object-fit: cover; }
+.img-caption { font-size: 0.75rem; color: #aaa; margin-top: 0.8rem; letter-spacing: 0.03em; }
+.step-flow { display: flex; align-items: center; gap: 0.8rem; background: #f9f9f9; padding: 1.5rem; border: 1px solid #e8e8e8; margin: 1.5rem 0 3rem; overflow-x: auto; }
+.step-flow img { flex: 1; width: 100%; min-width: 60px; max-width: 250px; display: block; background: #fff; border: 1px solid #e8e8e8; object-fit: cover; }
+.step-flow .arrow { color: #111; font-size: 2rem; flex-shrink: 0; font-weight: 700; padding: 0 0.5rem; }
+.assets-grid { display: flex; flex-wrap: wrap; gap: 1.2rem; justify-content: center; margin: 2.5rem 0; }
+.assets-item { background: #fafafa; border: 1px solid #e8e8e8; padding: 1.5rem 1rem; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; gap: 1rem; flex: 1 1 120px; max-width: 160px; border-radius: 6px; }
+.assets-item img { max-width: 65px; height: auto; display: block; filter: drop-shadow(0 5px 8px rgba(0,0,0,0.08)); }
+.assets-item span { font-size: 0.8rem; color: #444; text-align: center; font-weight: 700; }
+.img-missing {
+  background: #f7f7f7;
+  padding: 2.5rem 1.5rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+}
+.img-missing .tag { font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; background: #111; color: #fff; padding: 0.15rem 0.55rem; border-radius: 1px; margin-bottom: 0.4rem; }
+.img-missing strong { font-size: 0.85rem; color: #333; }
+.img-missing .desc { font-size: 0.76rem; color: #aaa; max-width: 200px; line-height: 1.6; margin-top: 0.2rem; }
+.note { border: 1px solid #e8e8e8; padding: 1.2rem 1.5rem; font-size: 0.88rem; color: #555; line-height: 1.8; margin-top: 2rem; }
+.note strong { color: #111; }
+.note code { font-size: 0.82rem; background: #f0f0f0; padding: 0.1rem 0.35rem; border-radius: 2px; direction: ltr; display: inline-block; }
+.swatch-row { display: flex; gap: 1.5rem; flex-wrap: wrap; margin-top: 2rem; }
+.swatch { display: flex; align-items: center; gap: 0.6rem; font-size: 0.82rem; color: #444; }
+.swatch-dot { width: 13px; height: 13px; border-radius: 50%; border: 1px solid rgba(0,0,0,0.12); flex-shrink: 0; }
+table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+th { text-align: right; padding: 0.7rem 0; font-weight: 700; border-bottom: 2px solid #111; }
+td { padding: 0.8rem 0; border-bottom: 1px solid #eee; color: #333; vertical-align: top; }
+.status-have { background: #111; color: #fff; font-size: 0.68rem; padding: 0.15rem 0.5rem; letter-spacing: 0.05em; }
+.status-need { background: #eee; color: #666; font-size: 0.68rem; padding: 0.15rem 0.5rem; letter-spacing: 0.05em; }
+footer { padding: 3rem 2rem; text-align: center; font-size: 0.78rem; color: #ccc; letter-spacing: 0.08em; border-top: 1px solid #e8e8e8; }
+@media (max-width: 600px) {
+  .img-row.cols-3 { grid-template-columns: 1fr 1fr; }
+  .img-row.cols-4 { grid-template-columns: 1fr 1fr; }
+  .nav-links { display: none; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-logo">محرك شجرة العائلة العضوية</span>
+  <ul class="nav-links">
+    <li><a href="#skeleton">الهيكل</a></li>
+    <li><a href="#widening">التعريض</a></li>
+    <li><a href="#coloring">التلوين</a></li>
+    <li><a href="#stamps">الأختام</a></li>
+    <li><a href="#leaves">الأوراق</a></li>
+    <li><a href="#touch-ups">الإضافات</a></li>
+    <li><a href="#inspiration">الإلهام</a></li>
+  </ul>
+</nav>
+
+<div class="hero">
+  <small class="hero-label">توثيق المشروع — وصف تقني بصري</small>
+  <h1>محرك شجرة<br>العائلة<br>العضوية</h1>
+  <p class="hero-sub">
+    تحويل بيانات JSON لعلاقات الأب والأبناء إلى شجرة عائلة ثنائية الأبعاد واقعية — فروع خشبية، أختام، وأوراق ملونة، دون أي تداخل بين الأعضاء.
+  </p>
+</div>
+
+<!-- STEP 1 -->
+<section id="skeleton">
+  <small class="step-label">الخطوة الأولى</small>
+  <span class="step-num amiri">١ — خوارزمية الهيكل</span>
+  <h2>توزيع الفروع والأبناء</h2>
+  <p>
+    أولى مراحل بناء الشجرة. تنشر الخوارزمية الأبناء في مواقعهم الصحيحة بدقة هندسية دون أي تداخل، مهما بلغ عمق الأنساب.
+    الناتج خريطة إحداثيات لكل عقدة وفرع، تُخزَّن في كاش الخادم تلقائياً في وضع الإنتاج.
+  </p>
+
+  <div class="img-block">
+    <img src="images/skeleton.png" alt="هيكل الشجرة الخوارزمي">
+    <p class="img-caption">↑ ناتج خوارزمية الهيكل — خطوط بيضاء رفيعة تمثل الفروع وأطراف الأوراق على خلفية داكنة</p>
+  </div>
+
+  <div class="note">
+    <strong>الكاش:</strong> في وضع الإنتاج، الهيكل يُولَّد مرة واحدة ويُحفظ. التحديث يحدث فقط عند تغيير بيانات JSON.
+  </div>
+</section>
+
+<!-- STEP 2 -->
+<section id="widening">
+  <small class="step-label">الخطوة الثانية</small>
+  <span class="step-num amiri">٢ — تعريض الفروع</span>
+  <h2>التدرج التشعبي في السماكة</h2>
+  <p>
+    بعد رسم الهيكل، تُطبَّق خوارزمية تدريجية تزيد سماكة كل فرع بحسب موقعه: الجذع أعرض، الفروع الرئيسية متوسطة، الأغصان الطرفية رفيعة — تماماً كالأشجار الحقيقية.
+  </p>
+
+</section>
+
+<!-- STEP 3 -->
+<section id="coloring">
+  <small class="step-label">الخطوة الثالثة</small>
+  <span class="step-num amiri">٣ — بناء الفروع والجذع</span>
+  <h2>من قناع أسود إلى خشب واقعي</h2>
+  <p>
+    مراحل متسلسلة تبدأ بتعريض الهيكل (القناع الأساسي) ثم إضافة نسيج الخشب، الظلال والأضواء لعمق ثلاثي الأبعاد، وأخيراً النمط العشوائي لخشونة اللحاء الطبيعية.
+  </p>
+
+  <br>
+  <h3>مراحل معالجة الجذع (Trunk)</h3>
+  <div class="step-flow">
+    <img src="images/trunk-1.png" alt="1. القناع الأساسي">
+    <div class="arrow">←</div>
+    <img src="images/trunk-2.png" alt="2. تطبيق النسيج">
+    <div class="arrow">←</div>
+    <img src="images/trunk-3.png" alt="3. الظل والضوء">
+  </div>
+  <p>يمكن ببساطة تبديل صورة الجذع. لانه غير متضمن بالخوارزمية وهذا ما يعطي لنا مرونة عالية في تغيير تصميم الجذع </p>
+ <br>
+ <br>
+
+  <h3>مراحل معالجة الفروع (Branches)</h3>
+  <div class="step-flow">
+    <img src="images/branch-1.png" alt="1. القناع الأساسي">
+    <div class="arrow">←</div>
+    <img src="images/branch-2.png" alt="2. تطبيق النسيج">
+    <div class="arrow">←</div>
+    <img src="images/branch-3.png" alt="3. الظل والضوء">
+    <div class="arrow">←</div>
+    <img src="images/branch-4.png" alt="4. النمط العشوائي">
+  </div>
+
+  <div class="note">
+    <strong>الطبقات الإضافية:</strong> يُستخدم نسيج الخشب الخام (<code>wood-patern.png</code>) ومقاطع الظل المنفصلة (<code>branch-shadow.png</code>) خلال هذه المراحل.
+  </div>
+</section>
+
+<!-- STEP 4 -->
+<section id="stamps">
+  <small class="step-label">الخطوة الرابعة</small>
+  <span class="step-num amiri">٤ — الأختام</span>
+  <h2>حاويات الأجداد الكبار</h2>
+  <p>
+    أختام دائرية توضع على الفروع في بدايتها أو منتصفها لتمييز الأجداد حسب مكانتهم. لكل مستوى شكل وجودة بصرية مختلفة.
+  </p>
+
+  <div class="assets-grid">
+    <div class="assets-item">
+      <img src="images/holy-stamp.png" alt="مقدس">
+      <span>مقدس (Holy)</span>
+    </div>
+    <div class="assets-item">
+      <img src="images/golden-stamp.png" alt="ذهبي">
+      <span>ذهبي (Golden)</span>
+    </div>
+    <div class="assets-item">
+      <img src="images/white-stamp.png" alt="أبيض">
+      <span>أبيض (White)</span>
+    </div>
+    <div class="assets-item">
+      <img src="images/yellow-stamp.png" alt="أصفر">
+      <span>أصفر (Yellow)</span>
+    </div>
+  </div>
+
+  <div class="note">
+    <strong>الموضع:</strong> يُحدد تلقائياً. حقل <code>type</code> في JSON يقبل: <code>holy</code> / <code>golden</code> / <code>white</code> / <code>yellow</code>. الأختام لا تتداخل مع الأوراق.
+  </div>
+</section>
+
+<!-- STEP 5 -->
+<section id="leaves">
+  <small class="step-label">الخطوة الخامسة</small>
+  <span class="step-num amiri">٥ — الأوراق</span>
+  <h2>حاويات الأجيال الأخيرة</h2>
+  <p>
+    توضع على أطراف الفروع وتحمل أسماء آخر جيلين. لون كل ورقة يُقرأ مباشرة من JSON — الجنس، حالة الحياة، الفرع العائلي، أو أي حقل آخر.
+  </p>
+
+  <div class="assets-grid">
+    <div class="assets-item">
+      <img src="images/leaf-dark.png" alt="غامقة">
+      <span>أخضر غامق (ذكر)</span>
+    </div>
+    <div class="assets-item">
+      <img src="images/leaf-normal.png" alt="فاتحة">
+      <span>أخضر فاتح (أنثى)</span>
+    </div>
+    <div class="assets-item">
+      <img src="images/leaf-blue.png" alt="زرقاء">
+      <span>أزرق (ذكر)</span>
+    </div>
+    <div class="assets-item">
+      <img src="images/leaf-pink.png" alt="وردية">
+      <span>وردي (أنثى)</span>
+    </div>
+    <div class="assets-item">
+      <img src="images/leaf-yellow.png" alt="متوفى">
+      <span>لون المتوفى</span>
+    </div>
+  </div>
+  <p class="img-caption" style="text-align: center;">↑ جميع أوراق الشجرة — اللون يُعيَّن في JSON والمحرك يطبقه تلقائياً</p>
+
+  <div class="note" style="margin-top: 3rem; margin-bottom: 1.5rem;">
+    <strong>المرونة (Modularity):</strong> يمكن ببساطة استبدال الأصول لتغيير أشكال الأوراق تماماً دون التأثير على خوارزمية المحرك أو هيكل الشجرة. فيما يلي تصاميم بديلة للتوضيح:
+  </div>
+
+  <div class="assets-grid" style="margin-top: 1.5rem;">
+    <div class="assets-item">
+      <img src="images/leaf-dark-illustration.png" alt="تصميم بديل">
+      <span>تصميم بديل</span>
+    </div>
+    <div class="assets-item">
+      <img src="images/leaf-normal-illustration.png" alt="تصميم بديل">
+      <span>تصميم بديل</span>
+    </div>
+    <div class="assets-item">
+      <img src="images/leaf-blue-illustration.png" alt="تصميم بديل">
+      <span>تصميم بديل</span>
+    </div>
+    <div class="assets-item">
+      <img src="images/leaf-pink-illustration.png" alt="تصميم بديل">
+      <span>تصميم بديل</span>
+    </div>
+    <div class="assets-item">
+      <img src="images/leaf-yellow-illustration.png" alt="تصميم بديل">
+      <span>تصميم بديل</span>
+    </div>
+  </div>
+
+  <div class="swatch-row">
+    <div class="swatch"><div class="swatch-dot" style="background:#1a5c1a;"></div> ذكر (غامق)</div>
+    <div class="swatch"><div class="swatch-dot" style="background:#4ab840;"></div> أنثى (فاتح)</div>
+    <div class="swatch"><div class="swatch-dot" style="background:#1a3a8c;"></div> ذكر (أزرق)</div>
+    <div class="swatch"><div class="swatch-dot" style="background:#c04070;"></div> أنثى (وردي)</div>
+    <div class="swatch"><div class="swatch-dot" style="background:#60c030;"></div> حي</div>
+    <div class="swatch"><div class="swatch-dot" style="background:#a09010;"></div> متوفى</div>
+  </div>
+
+  <div class="note">
+    <strong>المرونة:</strong> لا قيد على الألوان. أي لون يمكن ربطه بأي حقل في البيانات — الفرع العائلي، الترتيب، المنطقة الجغرافية، أو غيرها.
+  </div>
+</section>
+
+<!-- DATA -->
+<section id="data">
+  <small class="step-label">المدخل</small>
+  <span class="step-num amiri">بنية JSON</span>
+  <h2>هيكل البيانات</h2>
+  <p>ملف JSON واحد. كل شخص عقدة تحمل اسمه وحقوله الاختيارية وقائمة أبنائه. لا قاعدة بيانات، لا إعداد إضافي.</p>
+
+  <div style="margin-top: 2rem; border: 1px solid #e8e8e8; padding: 2rem; font-family: 'Courier New', monospace; font-size: 0.85rem; line-height: 2.1; background: #fafafa; direction: ltr; text-align: left;">
+<span style="color:#999">{</span><br>
+&nbsp;&nbsp;<span style="color:#555">"name"</span>: <span style="color:#111">"محمد بن إبراهيم"</span>,<br>
+&nbsp;&nbsp;<span style="color:#555">"type"</span>: <span style="color:#111">"holy"</span>, &nbsp;<span style="color:#ccc">// holy | golden | white | yellow</span><br>
+&nbsp;&nbsp;<span style="color:#555">"gender"</span>: <span style="color:#111">"male"</span>,<br>
+&nbsp;&nbsp;<span style="color:#555">"alive"</span>: <span style="color:#111">false</span>,<br>
+&nbsp;&nbsp;<span style="color:#555">"children"</span>: <span style="color:#999">[</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#999">{</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#555">"name"</span>: <span style="color:#111">"أحمد"</span>,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#555">"gender"</span>: <span style="color:#111">"male"</span>,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#555">"alive"</span>: <span style="color:#111">true</span>,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#555">"children"</span>: <span style="color:#999">[...]</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#999">}</span><br>
+&nbsp;&nbsp;<span style="color:#999">]</span><br>
+<span style="color:#999">}</span>
+  </div>
+</section>
+
+<!-- ABOUT PAPER -->
+<section id="about-paper">
+  <small class="step-label">تحسينات التصميم</small>
+  <span class="step-num amiri">ورقة التعريف (About Paper)</span>
+  <h2>نبذة العائلة</h2>
+  <p>
+    هذا القسم ليس جزءاً من محرك الشجرة الأساسي، ولكنه إضافة جمالية لتصميم الصفحة النهائية. عبارة عن ورقة تحتوي على نبذة تعريفية عن العائلة.
+  </p>
+  <div class="img-block">
+    <img src="images/about-paper.png" alt="ورقة التعريف بالعائلة">
+  </div>
+</section>
+
+<!-- TOUCH UPS -->
+<section id="touch-ups">
+  <small class="step-label">تطويرات قادمة</small>
+  <span class="step-num amiri">لمسات نهائية (Touch-ups)</span>
+  <h2>تحسينات وإضافات مستقبلية</h2>
+  <p>سيتم تطبيق العديد من اللمسات الجمالية لرفع جودة التصميم، وتشمل:</p>
+  <ul style="padding-right: 1.5rem; margin-top: 1.5rem; line-height: 2;">
+    <li><strong>الخطوط (Fonts):</strong> دمج خطوط عربية كلاسيكية وأكثر فخامة تناسب روح الشجرة.</li>
+    <li><strong>المزيد من الأختام:</strong> أختام بتصاميم ومستويات إضافية لتمييز الأجداد.</li>
+    <li><strong>تحسين الإضاءة والظلال:</strong> إكساء (Skinning) أكثر واقعية مع ظلال متطورة للفروع والجذع.</li>
+    <li><strong>أشكال إضافية للجذوع:</strong> إدراج صور إضافية للجذوع لمنح تنوع أكبر.</li>
+    <li><strong>خلفية الصفحة (Page Background):</strong> احتواء الشجرة وورقة التعريف والوصف في صفحة ذات خلفية متعددة الطبقات (Multilayered Background) لخلق بيئة متكاملة للشجرة.</li>
+  </ul>
+</section>
+
+<!-- INSPIRATION -->
+<section id="inspiration" style="border-bottom: none;">
+  <small class="step-label">الرؤية الفنية</small>
+  <span class="step-num amiri">شجرة الإلهام (Inspiration Tree)</span>
+  <h2>التصميم الأكثر أناقة</h2>
+  <p>
+    تم استلهام التصميم من هذه الشجرة نظراً لكونها تتمتع بأكثر التصاميم أناقة وجمالاً، حيث يتم العمل على محاكاة هذه الروح الكلاسيكية في تصميم المحرك.
+  </p>
+  <div class="img-block">
+    <img src="images/inspiration_tree.jfif" alt="شجرة الإلهام">
+  </div>
+</section>
+
+<footer>
+  محرك شجرة العائلة العضوية &nbsp;|&nbsp; Organic Family Tree Engine &nbsp;|&nbsp; 2025
+</footer>
+</body>
+</html>
