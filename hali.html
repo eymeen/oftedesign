@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quality X – Halı Sanatı Öğretmeni Teklif</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+    @media print {
+        body {
+            background: white !important;
+            -webkit-print-color-adjust: exact; /* Forces background colors/images to show */
+            print-color-adjust: exact;
+        }
+        /* This prevents the browser from splitting cards in half */
+        .target-card, .content-card, .tip-block, .section {
+            page-break-inside: avoid;
+            break-inside: avoid;
+        }
+    }
+  :root {
+    --ink: #1a1a1a;
+    --ink-soft: #4a4a4a;
+    --ink-muted: #888;
+    --rule: #c5d8d3;
+    --bg: #f5faf9;
+    --paper: #ffffff;
+    --accent: #4fb59a;
+    --accent-light: #e5f5f1;
+    --accent-dark: #22594a;
+    --success: #1caa47;
+    --tag-bg: #e5f0ed;
+  }
+
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  /* PAGE SHELL */
+  .page {
+    max-width: 860px;
+    margin: 0 auto;
+    background: var(--paper);
+    /* box-shadow: 0 2px 40px rgba(0,0,0,0.08); */
+  }
+
+  /* COVER */
+  .cover {
+    background: var(--ink);
+    color: white;
+    padding: 64px 72px 56px;
+    position: relative;
+    overflow: hidden;
+  }
+  .cover::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 280px; height: 280px;
+    border-radius: 50%;
+    background: #4fb59a1f;
+  }
+  .cover::after {
+    content: '';
+    position: absolute;
+    bottom: -40px; left: 40px;
+    width: 160px; height: 160px;
+    border-radius: 50%;
+    background: #4fb59a12;
+  }
+
+  .cover-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 56px;
+  }
+
+  .logo-block img {
+    height: 40px;
+    opacity: 0.95;
+  }
+  .logo-fallback {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    color: white;
+  }
+  .logo-fallback span { color: var(--accent); }
+
+  .cover-meta {
+    text-align: right;
+    font-size: 12px;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.8;
+  }
+
+  .cover-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 38px;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    margin-bottom: 16px;
+  }
+  .cover-title span { color: var(--accent); }
+
+  .cover-sub {
+    color: rgba(255,255,255,0.6);
+    font-size: 15px;
+    font-weight: 300;
+    max-width: 480px;
+    margin-bottom: 40px;
+  }
+
+  .cover-divider {
+    width: 48px;
+    height: 2px;
+    background: var(--accent);
+    margin-bottom: 32px;
+  }
+
+  .cover-prepared {
+    font-size: 12px;
+    color: rgba(255,255,255,0.4);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .cover-prepared strong {
+    display: block;
+    color: rgba(255,255,255,0.85);
+    font-size: 14px;
+    font-weight: 500;
+    margin-top: 4px;
+    text-transform: none;
+    letter-spacing: 0;
+  }
+
+  /* TOC */
+  .toc {
+    background: var(--accent-light);
+    padding: 36px 72px;
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+    border-bottom: 1px solid var(--rule);
+  }
+  .toc-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink-soft);
+  }
+  .toc-num {
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: white;
+    font-size: 11px;
+    font-weight: 600;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+
+  /* BODY */
+  .body { padding: 0 72px 72px; }
+
+  /* SECTION */
+  .section { padding-top: 56px; }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 28px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .section-icon {
+    width: 36px; height: 36px;
+    background: var(--ink);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+  .section-num {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 2px;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  /* SUBSECTION */
+  .sub {
+    margin-bottom: 28px;
+  }
+  .sub-title {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--accent-dark);
+    margin-bottom: 12px;
+  }
+
+  /* TARGETING GRID */
+  .target-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .target-card {
+    background: var(--tag-bg);
+    border-radius: 8px;
+    padding: 14px 16px;
+  }
+  .target-card .label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-bottom: 6px;
+  }
+  .target-card .value {
+    font-size: 13px;
+    color: var(--ink-soft);
+    line-height: 1.5;
+  }
+
+  /* COST TABLE */
+  .cost-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  .cost-table th {
+    text-align: left;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .cost-table td {
+    padding: 11px 12px;
+    border-bottom: 1px solid #f0ede8;
+    color: var(--ink-soft);
+  }
+  .cost-table td:first-child { color: var(--ink); font-weight: 500; }
+  .cost-table tr:last-child td { border-bottom: none; }
+  .cost-table .highlight td {
+    background: var(--accent-light);
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  .cost-note {
+    background: #fff8f0;
+    border-left: 3px solid var(--accent);
+    padding: 12px 16px;
+    border-radius: 0 6px 6px 0;
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    margin-top: 12px;
+    line-height: 1.6;
+  }
+
+  /* EXAMPLE LABEL */
+  .example-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #eef4ee;
+    color: var(--success);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 20px;
+    margin-bottom: 14px;
+  }
+
+  /* CONTENT CARDS */
+  .content-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .content-card {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    padding: 14px 16px;
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    background: #fdfcfb;
+  }
+  .content-card-num {
+    width: 26px; height: 26px;
+    background: var(--ink);
+    color: white;
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .content-card-body strong {
+    display: block;
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 3px;
+  }
+  .content-card-body span {
+    font-size: 12.5px;
+    color: var(--ink-muted);
+    line-height: 1.5;
+  }
+
+  /* FEATURE LIST */
+  .feature-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .feature-item {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    font-size: 13px;
+    color: var(--ink-soft);
+  }
+  .feature-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    margin-top: 7px;
+    flex-shrink: 0;
+  }
+
+  /* LEGAL / PIXEL PILLS */
+  .pill-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .pill {
+    background: var(--tag-bg);
+    border-radius: 20px;
+    padding: 6px 14px;
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  /* SEO */
+  .seo-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+  }
+  .seo-card {
+    background: var(--tag-bg);
+    border-radius: 8px;
+    padding: 14px;
+    text-align: center;
+  }
+  .seo-card .icon { font-size: 20px; margin-bottom: 6px; }
+  .seo-card .label { font-size: 11.5px; font-weight: 600; color: var(--ink); margin-bottom: 4px; }
+  .seo-card .desc { font-size: 11.5px; color: var(--ink-muted); line-height: 1.4; }
+
+  /* TIPS */
+  .tips-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .tip-block {
+    border: 1px solid var(--rule);
+    border-radius: 10px;
+    padding: 18px 20px;
+    background: #fdfcfb;
+  }
+  .tip-block .tip-head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+  .tip-block .tip-icon { font-size: 18px; }
+  .tip-block .tip-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .tip-block ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
+  .tip-block ul li {
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    padding-left: 14px;
+    position: relative;
+    line-height: 1.5;
+  }
+  .tip-block ul li::before {
+    content: '–';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+  }
+
+  /* FOOTER */
+  .footer {
+    background: var(--ink);
+    color: rgba(255,255,255,0.5);
+    padding: 32px 72px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+  }
+  .footer .brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: white;
+  }
+  .footer .brand span { color: var(--accent); }
+
+  /* DIVIDER */
+  .divider {
+    width: 100%;
+    height: 1px;
+    background: var(--rule);
+    margin: 32px 0;
+  }
+
+  @media print {
+    body { background: white; }
+    .page { box-shadow: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- COVER -->
+  <div class="cover">
+    <div class="cover-top">
+      <div class="logo-block">
+        <img src="logo.png" alt="Quality X" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
+        <div class="logo-fallback" style="display:none">Quality <span>X</span></div>
+      </div>
+      <div class="cover-meta">
+        Teklif No: QX-2026-ART<br>
+        Tarih: Mayıs 2026<br>
+        Hazırlayan: Eymen Iyd
+      </div>
+    </div>
+
+    <div class="cover-title">
+      Halı Sanatı Öğretmeni<br>
+      <span>Dijital Büyüme Teklifi</span>
+    </div>
+    <div class="cover-sub">
+      Meta Reklamları · Web Sitesi · Sosyal Medya İçeriği
+    </div>
+    <div class="cover-divider"></div>
+    <div class="cover-prepared">
+      Hazırlayan
+      <strong>Quality X — Eymen Iyd</strong>
+    </div>
+  </div>
+
+  <!-- TOC -->
+  <div class="toc">
+    <div class="toc-item"><div class="toc-num">1</div> Meta Reklamları</div>
+    <div class="toc-item"><div class="toc-num">2</div> Web Sitesi</div>
+    <div class="toc-item"><div class="toc-num">3</div> Sosyal Medya İçeriği</div>
+    <div class="toc-item"><div class="toc-num">4</div> Öğretmene İpuçları</div>
+  </div>
+
+  <!-- BODY -->
+  <div class="body">
+
+    <!-- ── SECTION 1: META ADS ── -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon">📣</div>
+        <div>
+          <span class="section-num">Bölüm 01</span>
+          <div class="section-title">Meta Reklamları</div>
+        </div>
+      </div>
+
+      <!-- Kampanya Hedefi -->
+      <div class="sub">
+        <div class="sub-title">Kampanya Hedefi</div>
+        <p style="font-size:13.5px; color:var(--ink-soft); max-width:640px;">
+          Potansiyel öğrencilerden <strong style="color:var(--ink)">lead (form dolduran kişi)</strong> toplamak. Tek kampanya yapısı; soğuk kitle ve retargeting katmanıyla çalışır.
+        </p>
+      </div>
+
+      <!-- Hedefleme -->
+      <div class="sub">
+        <div class="sub-title">Hedefleme Detayları</div>
+        <div class="target-grid">
+          <div class="target-card">
+            <div class="label">👤 Demografi</div>
+            <div class="value">22–45 yaş · Türkiye</div>
+          </div>
+          <div class="target-card">
+            <div class="label">💡 İlgi Alanları</div>
+            <div class="value">El sanatları · İç mimari · DIY · Resim & çizim · Online kurslar</div>
+          </div>
+          <div class="target-card">
+            <div class="label">🎯 Davranış</div>
+            <div class="value">Online alışveriş yapanlar · Kurs satın almış kişiler</div>
+          </div>
+          <div class="target-card">
+            <div class="label">🔁 Retargeting</div>
+            <div class="value">Siteyi ziyaret edenler · Videoyu %50+ izleyenler</div>
+          </div>
+          <div class="target-card" style="grid-column: 1 / -1;">
+            <div class="label">🚫 Dışlama</div>
+            <div class="value">Mevcut öğrenciler (custom audience) · Erkekler</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tahmini Maliyet -->
+      <div class="sub">
+        <div class="sub-title">Tahmini Maliyet</div>
+        <table class="cost-table">
+          <thead>
+            <tr>
+              <th>Kalem</th>
+              <th>Aralık</th>
+              <th>Açıklama</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Günlük Bütçe</td>
+              <td>150 – 300 TL / gün</td>
+              <td>Test fazı için düşük uçtan başlanması önerilir</td>
+            </tr>
+            <tr>
+              <td>Aylık Bütçe (tahmini)</td>
+              <td>4.500 – 9.000 TL / ay</td>
+              <td>Günlük bütçe × 30 gün</td>
+            </tr>
+            <tr class="highlight">
+              <td>Lead Başı Maliyet (CPL)</td>
+              <td>40 – 90 TL</td>
+              <td>Optimizasyon sonrası iyileşir</td>
+            </tr>
+            <tr>
+              <td>Tahmini Aylık Lead</td>
+              <td>50 – 200 lead</td>
+              <td>Bütçe ve CPL aralığına göre değişir</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="cost-note">
+          ⚠️ İlk 2 hafta <strong>test fazıdır</strong> — CPL daha yüksek olabilir. Facebook algoritması öğrendikçe maliyet düşer, lead kalitesi artar. Bu rakamlar sektör ortalamasına dayalı tahmindir; gerçek sonuçlar kitleye ve kreatife göre farklılık gösterebilir.
+        </div>
+      </div>
+
+      <!-- Kampanya Yapısı -->
+      <div class="sub">
+        <div class="sub-title">Kampanya Yapısı</div>
+        <div style="font-size:13px; color:var(--ink-soft); margin-bottom:16px;">
+          1 Kampanya → 2 Reklam Seti (Soğuk Kitle + Retargeting) → Her sette A/B test
+        </div>
+      </div>
+
+      <!-- Reklam Materyalleri – Videolar -->
+      <div class="sub">
+        <div class="sub-title">Reklam Materyalleri — Videolar (1–4 adet)</div>
+        <div class="example-tag">✦ Aşağıdakiler örnek fikirlerdir</div>
+        <div class="content-cards">
+          <div class="content-card">
+            <div class="content-card-num">1</div>
+            <div class="content-card-body">
+              <strong>"Öncesi / Sonrası"</strong>
+              <span>Boş bir halıdan bitmiş esere geçiş · Duygusal müzik · Son karede kurs çağrısı</span>
+            </div>
+          </div>
+          <div class="content-card">
+            <div class="content-card-num">2</div>
+            <div class="content-card-body">
+              <strong>"Hızlandırılmış Çizim"</strong>
+              <span>30 saniyelik time-lapse · Merak uyandıran tempo · "Sen de yapabilirsin" mesajı</span>
+            </div>
+          </div>
+          <div class="content-card">
+            <div class="content-card-num">3</div>
+            <div class="content-card-body">
+              <strong>"Öğrenci Deneyimi"</strong>
+              <span>Kursdan mezun birinin kısa yorumu + elindeki eseri göstermesi</span>
+            </div>
+          </div>
+          <div class="content-card">
+            <div class="content-card-num">4</div>
+            <div class="content-card-body">
+              <strong>"Neden Halıya?"</strong>
+              <span>Öğretmenin kameraya hitap ettiği, bu sanat dalının özelliğini anlattığı talking-head video</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Reklam Materyalleri – Carousels -->
+      <div class="sub">
+        <div class="sub-title">Reklam Materyalleri — Carousel'lar (3 adet)</div>
+        <div class="example-tag">✦ Aşağıdakiler örnek fikirlerdir</div>
+        <div class="content-cards">
+          <div class="content-card">
+            <div class="content-card-num">1</div>
+            <div class="content-card-body">
+              <strong>"Adım Adım Nasıl Yapılır?"</strong>
+              <span>5 slayt · Tekniği merak ettiren ama tam vermeyen ipuçları</span>
+            </div>
+          </div>
+          <div class="content-card">
+            <div class="content-card-num">2</div>
+            <div class="content-card-body">
+              <strong>"Öğrenci Eserleri Galerisi"</strong>
+              <span>Farklı seviyelerdeki çalışmalar · Güven inşa eder</span>
+            </div>
+          </div>
+          <div class="content-card">
+            <div class="content-card-num">3</div>
+            <div class="content-card-body">
+              <strong>"Sıkça Sorulan Sorular"</strong>
+              <span>"Hiç deneyimim yok, yapabilir miyim?" gibi itirazları önceden kıran slaytlar</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Statik Tasarımlar -->
+      <div class="sub">
+        <div class="sub-title">Statik Tasarımlar</div>
+        <div class="pill-row">
+          <div class="pill">🖼 Kurs tanıtım afişi + CTA</div>
+          <div class="pill">📊 Sosyal kanıt tasarımı (rakam odaklı)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ── SECTION 2: WEB SİTESİ ── -->
+    <div class="section" style="padding-top:0">
+      <div class="section-header">
+        <div class="section-icon">🌐</div>
+        <div>
+          <span class="section-num">Bölüm 02</span>
+          <div class="section-title">Web Sitesi</div>
+        </div>
+      </div>
+
+      <div class="sub">
+        <div class="sub-title">Yapı</div>
+        <p style="font-size:13.5px; color:var(--ink-soft);">Tek sayfalık (single-page) statik landing page. Hızlı, sade, dönüşüm odaklı.</p>
+      </div>
+
+      <!-- Sayfa Bölümleri -->
+      <div class="sub">
+        <div class="sub-title">Sayfa Bölümleri</div>
+        <div class="content-cards">
+          <div class="content-card">
+            <div class="content-card-num">1</div>
+            <div class="content-card-body"><strong>Hero</strong><span>Dikkat çekici başlık + öğretmen fotoğrafı + "Ücretsiz Ders Al" CTA butonu</span></div>
+          </div>
+          <div class="content-card">
+            <div class="content-card-num">2</div>
+            <div class="content-card-body"><strong>Neden Bu Kurs?</strong><span>3–4 maddelik fayda listesi (ikonlu)</span></div>
+          </div>
+          <div class="content-card">
+            <div class="content-card-num">3</div>
+            <div class="content-card-body"><strong>Nasıl İşliyor?</strong><span>3 adımlık süreç görseli: Kaydol → Öğren → Eserini Yap</span></div>
+          </div>
+          <div class="content-card">
+            <div class="content-card-num">4</div>
+            <div class="content-card-body"><strong>Öğrenci Yorumları</strong><span>Gerçek isim + fotoğraf + kısa yorum</span></div>
+          </div>
+          <div class="content-card">
+            <div class="content-card-num">5</div>
+            <div class="content-card-body"><strong>Öğretmen Hakkında</strong><span>Kısa biyografi, güven inşası</span></div>
+          </div>
+          <div class="content-card">
+            <div class="content-card-num">6</div>
+            <div class="content-card-body"><strong>SSS</strong><span>Accordion formatında sıkça sorulan sorular</span></div>
+          </div>
+          <div class="content-card">
+            <div class="content-card-num">7</div>
+            <div class="content-card-body"><strong>Lead Formu</strong><span>Ad · Telefon · E-posta — Sade, büyük CTA butonu</span></div>
+          </div>
+          <div class="content-card">
+            <div class="content-card-num">8</div>
+            <div class="content-card-body"><strong>Footer</strong><span>İletişim · Sosyal medya linkleri · Yasal sayfalar</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pixel Entegrasyonu -->
+      <div class="sub">
+        <div class="sub-title">Pixel & Analitik Entegrasyonu</div>
+        <div class="pill-row">
+          <div class="pill">📘 Meta Pixel</div>
+          <div class="pill">🎵 TikTok Pixel</div>
+          <div class="pill">📊 Google Analytics 4</div>
+          <div class="pill">🔵 Google Ads Conversion Tag</div>
+          <div class="pill">🏷 Google Tag Manager</div>
+        </div>
+        <p style="margin-top:10px; font-size:12.5px; color:var(--ink-muted);">Tüm pixel'ler Google Tag Manager üzerinden merkezi olarak yönetilir.</p>
+      </div>
+
+      <!-- Yasal Sayfalar -->
+      <div class="sub">
+        <div class="sub-title">Yasal Sayfalar (KVKK Uyumlu)</div>
+        <div class="pill-row">
+          <div class="pill">📄 Gizlilik Politikası</div>
+          <div class="pill">🍪 Çerez Politikası + Banner</div>
+          <div class="pill">📋 Kullanım Koşulları</div>
+          <div class="pill">ℹ️ KVKK Aydınlatma Metni</div>
+        </div>
+      </div>
+
+      <!-- SEO -->
+      <div class="sub">
+        <div class="sub-title">SEO Stratejisi</div>
+        <div class="seo-grid">
+          <div class="seo-card">
+            <div class="icon">🔑</div>
+            <div class="label">Hedef Kelimeler</div>
+            <div class="desc">"halı üzerine çizim kursu" · "halı sanatı öğren" · "online el sanatları kursu"</div>
+          </div>
+          <div class="seo-card">
+            <div class="icon">⚡</div>
+            <div class="label">Teknik Performans</div>
+            <div class="desc">Lighthouse 90+ · WebP görseller · Alt text optimizasyonu</div>
+          </div>
+          <div class="seo-card">
+            <div class="icon">🗂</div>
+            <div class="label">Yapısal Veriler</div>
+            <div class="desc">Course Schema · Person Schema · Open Graph etiketleri · Sitemap.xml</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ── SECTION 3: SOSYAL MEDYA ── -->
+    <div class="section" style="padding-top:0">
+      <div class="section-header">
+        <div class="section-icon">📱</div>
+        <div>
+          <span class="section-num">Bölüm 03</span>
+          <div class="section-title">Sosyal Medya İçeriği</div>
+        </div>
+      </div>
+
+      <div style="font-size:13.5px; color:var(--ink-soft); margin-bottom:24px;">
+        <strong style="color:var(--ink)">Aylık Paket:</strong> 6 Video + 6 Carousel
+      </div>
+
+      <!-- Videolar -->
+      <div class="sub">
+        <div class="sub-title">Videolar (6 / ay) — Trend & Kimlik Odaklı</div>
+        <div class="example-tag">✦ Aşağıdakiler örnek fikirlerdir</div>
+        <div class="content-cards">
+          <div class="content-card">
+            <div class="content-card-num">1</div>
+            <div class="content-card-body"><strong>"POV: İlk dersine geliyorsun"</strong><span>Öğrenci bakış açısından · Trend ses · Merak ve heyecan kancası</span></div>
+          </div>
+          <div class="content-card">
+            <div class="content-card-num">2</div>
+            <div class="content-card-body"><strong>"Bu el benim"</strong><span>Öğretmenin elinin çalışırken yakın çekimi · Sessiz ama hipnotik</span></div>
+          </div>
+          <div class="content-card">
+            <div class="content-card-num">3</div>
+            <div class="content-card-body"><strong>"Bunu bir yılda öğrendim"</strong><span>Öğrenci before/after dönüşümü · Duygusal kanca</span></div>
+          </div>
+          <div class="content-card">
+            <div class="content-card-num">4</div>
+            <div class="content-card-body"><strong>"Aslında çok kolay"</strong><span>Kısa teknik an · "Sen de yapabilirsin" hissi veren format</span></div>
+          </div>
+          <div class="content-card">
+            <div class="content-card-num">5</div>
+            <div class="content-card-body"><strong>"Stüdyodan ses var"</strong><span>Ders ortamından bir kesit · Samimi atmosfer · Topluluk hissi</span></div>
+          </div>
+          <div class="content-card">
+            <div class="content-card-num">6</div>
+            <div class="content-card-body"><strong>Trend Ses Üzeri Çalışma Videosu</strong><span>O hafta viral olan ses üzerine estetik çizim görüntüsü</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Carousels -->
+      <div class="sub">
+        <div class="sub-title">Carousel'lar (6 / ay)</div>
+        <div class="example-tag">✦ Aşağıdakiler örnek fikirlerdir</div>
+        <div class="content-cards">
+          <div class="content-card">
+            <div class="content-card-num">1</div>
+            <div class="content-card-body"><strong>"Halı sanatı hakkında bilmediğin 5 şey"</strong><span>Eğitici · Paylaşılabilir format</span></div>
+          </div>
+          <div class="content-card">
+            <div class="content-card-num">2</div>
+            <div class="content-card-body"><strong>"Bu ay öğrenci eserleri"</strong><span>Galeri formatı · Sosyal kanıt</span></div>
+          </div>
+          <div class="content-card">
+            <div class="content-card-num">3</div>
+            <div class="content-card-body"><strong>"Yeni başlayanlar için 3 ipucu"</strong><span>Değer odaklı · Kayıt için tıklatır</span></div>
+          </div>
+          <div class="content-card">
+            <div class="content-card-num">4</div>
+            <div class="content-card-body"><strong>"Hangi renk kombinasyonu sana uyar?"</strong><span>Etkileşim kurgulu · Cevap verdiren format</span></div>
+          </div>
+          <div class="content-card">
+            <div class="content-card-num">5</div>
+            <div class="content-card-body"><strong>Motivasyon + Sanat Alıntısı</strong><span>Estetik tasarım · Kaydedilme hedefli</span></div>
+          </div>
+          <div class="content-card">
+            <div class="content-card-num">6</div>
+            <div class="content-card-body"><strong>Kurs Duyurusu / Kampanya</strong><span>O aya özel aksiyon içeriği</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ── SECTION 4: ÖĞRETMENE İPUÇLARI ── -->
+    <div class="section" style="padding-top:0">
+      <div class="section-header">
+        <div class="section-icon">💡</div>
+        <div>
+          <span class="section-num">Bölüm 04</span>
+          <div class="section-title">Öğretmene Özel İpuçları</div>
+        </div>
+      </div>
+      <p style="font-size:13px; color:var(--ink-muted); margin-bottom:20px; font-style:italic;">
+        Bu bölüm ajansla çalışmasan da uygulayabileceğin temel stratejileri kapsar.
+      </p>
+
+      <div class="tips-grid">
+        <div class="tip-block">
+          <div class="tip-head">
+            <span class="tip-icon">📲</span>
+            <span class="tip-title">Organik Büyüme</span>
+          </div>
+          <ul>
+            <li>Her hafta en az 1 "çalışırken" videosu paylaş. Yüzünü göster, sesini duyur — marka sensin.</li>
+            <li>Öğrencilerinden reel veya story paylaşmalarını iste. Onların ağı, senin reklamın.</li>
+            <li>Bio'nu şöyle yaz: "Halıya sanat çizmeyi öğretiyorum 🧵 → Link'te ücretsiz ders"</li>
+          </ul>
+        </div>
+        <div class="tip-block">
+          <div class="tip-head">
+            <span class="tip-icon">💸</span>
+            <span class="tip-title">Reklam Verirken</span>
+          </div>
+          <ul>
+            <li>İlk başta küçük bütçeyle (100–150 TL/gün) test et, sonra ölçekle.</li>
+            <li>En iyi lead kaynağı genellikle "öğrenci deneyimi" videoları olur.</li>
+            <li>Formu kısa tut: sadece isim + telefon. Her ek alan dönüşümü düşürür.</li>
+          </ul>
+        </div>
+        <div class="tip-block">
+          <div class="tip-head">
+            <span class="tip-icon">🌐</span>
+            <span class="tip-title">Web Sitesi için</span>
+          </div>
+          <ul>
+            <li>Google'da çıkmak için kısa blog yazıları ekle — fotoğraflı, gerçek projeler.</li>
+            <li>Google Business Profile'a yorumlar topla. SEO'ya doğrudan katkısı var.</li>
+          </ul>
+        </div>
+        <div class="tip-block">
+          <div class="tip-head">
+            <span class="tip-icon">🧠</span>
+            <span class="tip-title">Genel Strateji</span>
+          </div>
+          <ul>
+            <li>İlk 3 ay içerik düzensiz olsa da reklam çalışmaya devam eder.</li>
+            <li>Organik + ücretli birlikte yürütülmeli, biri diğerini güçlendirir.</li>
+            <li>Fiyatı sosyal medyada söyleme. Önce merak uyandır, sonra forma yönlendir.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /body -->
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="brand">Quality <span>X</span></div>
+    <div>Eymen Iyd · Mayıs 2026</div>
+    <div>Gizli & Ticari</div>
+  </div>
+
+</div><!-- /page -->
+
+</body>
+</html>
